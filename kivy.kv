@@ -1,0 +1,70 @@
+<Header_SectionSelector>:
+    size_hint_y: None
+    height: 50
+
+
+    Button:
+        text: "Btn1"
+
+
+    Button:
+        text: "Btn2"
+
+
+    Button:
+        text: "Btn3"
+
+
+    Button:
+        text: "Exit"
+        on_press: app.leave()
+
+
+
+<Body_Math>:
+    cols: 2
+    rows: 1
+
+
+    TextInput:
+        text: "Enter"
+
+
+    Button:
+        text: "Count"
+
+
+
+<Footer_Credentials>:
+    anchor_x: "right"
+    size_hint_y: None
+    height: 20
+    padding: 10, 0
+
+
+    # Needed for laying list of labels
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: None, None # Do not fill whole Footer -> else alignment won't work
+        height: root.height
+        width: self.minimum_width
+
+
+        Label:
+            text: "pie.$ credentials"
+            color: (0.41, 0.42, 0.74, 1)
+
+            text_size: None, None   # Turn off text width matching Label's width, Look down
+            size_hint: None, None   # Turn off Label's width match Layout's width, Look down 
+            size: self.texture_size  # Match Label's width with text's widthe
+            padding: 5, 0
+
+
+        Label:
+            text: "@pie.2025"
+            color: (0.20, 0.15, 0.74, 1)
+            markup: True
+
+            text_size: None, None   # Turn off text width matching Label's width, Look down
+            size_hint: None, None   # Turn off Label's width match Layout's width, Look down 
+            size: self.texture_size  # Match Label's width with text's widthe
