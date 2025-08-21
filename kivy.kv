@@ -31,16 +31,18 @@
         height: 100
 
         TextInput:
+            id: "math_input"
             placeholder: "Enter"
 
         Button:
             text: "Count"
             background_color: (0.5, 0.5, 0.5, 1)
             backgroun_normal: ""
-            on_input: app.do_math()
+            on_press: app.do_math()
 
 
     Label:
+        id: "math_output"
         text: "Output"
         # color: (0.5, 0.5, 0.5, 1)
 

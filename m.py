@@ -33,6 +33,36 @@ class Footer_Credentials(AnchorLayout):
     pass
  
 
+
+# Math
+def is_number(string:str) -> bool:
+    try:
+        float(string)
+        return True
+    except (ValueError, TypeError):
+        return False 
+
+def lexer(input_str):
+    numbers = []
+    operations = []
+    for word in str.split(input_str, " "):
+        if is_number(word):
+            numbers.append(int(word))
+        elif word in OPERATORS.keys():
+            operations.append(word)
+
+    if len(numbers) < 2 or len(operations) < 1:
+        return "Error: wrong syntaxis"
+
+    result = numbers[0]
+    for i in range(1, len(numbers)):
+        num = numbers[i]
+        operator = operations[i-1]
+        result = OPERATORS[operator](result, num)
+
+    return result
+
+
 # Build
 class KivyApp(App):
 
@@ -64,37 +94,9 @@ class KivyApp(App):
 
     
     # Math
-    # (simple lexer for doing math)
-    def is_number(string:str) -> bool:
-        try:
-            float(string)
-            return True
-        except (ValueError, TypeError):
-            return False 
-
-    def lexer(input_str):
-        numbers = []
-        operations = []
-        for word in str.split(input_str, " "):
-            if is_number(word):
-                numbers.append(int(word))
-            elif word in OPERATORS.keys():
-                operations.append(word)
-
-        if len(numbers) < 2 or len(operations) < 1:
-            return "Error: wrong syntaxis"
-
-        result = numbers[0]
-        for i in range(1, len(numbers)):
-            num = numbers[i]
-            operator = operations[i-1]
-            result = OPERATORS[operator](result, num)
-
-        return result
-
     # (handle button click)
-    def do_math():
-        
+    def do_math(self):
+       self.ids.math_output.text=lexer(self.math_input)
  
 
 # Run
