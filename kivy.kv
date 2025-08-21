@@ -22,16 +22,27 @@
 
 
 <Body_Math>:
-    cols: 2
-    rows: 1
+    orientation: "vertical"
+
+    
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height: 100
+
+        TextInput:
+            placeholder: "Enter"
+
+        Button:
+            text: "Count"
+            background_color: (0.5, 0.5, 0.5, 1)
+            backgroun_normal: ""
+            on_input: app.do_math()
 
 
-    TextInput:
-        text: "Enter"
-
-
-    Button:
-        text: "Count"
+    Label:
+        text: "Output"
+        # color: (0.5, 0.5, 0.5, 1)
 
 
 
