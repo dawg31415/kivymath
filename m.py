@@ -4,7 +4,7 @@ kivy.require('2.0.0')
 from kivy.app import App
 
 from kivy.uix.textinput import TextInput
-from kivy.uix.button import Label
+from kivy.uix.button import Button
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.stacklayout import StackLayout
@@ -22,18 +22,6 @@ OPERATORS = {
 }
 
 
-# Initialization
-class Header_SectionSelector(BoxLayout):
-    pass
-
-class Body_Math(BoxLayout):
-    pass
-
-class Footer_Credentials(AnchorLayout):
-    pass
- 
-
-
 # Math
 def is_number(string:str) -> bool:
     try:
@@ -42,7 +30,7 @@ def is_number(string:str) -> bool:
     except (ValueError, TypeError):
         return False 
 
-def lexer(input_str):
+def lexer(input_str: str) -> str:
     numbers = []
     operations = []
     for word in str.split(input_str, " "):
@@ -60,10 +48,26 @@ def lexer(input_str):
         operator = operations[i-1]
         result = OPERATORS[operator](result, num)
 
-    return result
+    return str(result)
 
 
-# Build
+# App
+class Header_SectionSelector(BoxLayout):
+    pass
+
+class Body_Math(BoxLayout):
+    # (runs after app is loaded)
+    def on_kv_post(self, base_widget):
+        self.math_input = self.ids.math_input
+
+    # Math
+    # (handle button click)
+    def do_math(self):
+       self.ids.math_output.text=lexer(self.math_input.text)
+
+class Footer_Credentials(AnchorLayout):
+    pass
+
 class KivyApp(App):
 
     # Init
@@ -76,10 +80,6 @@ class KivyApp(App):
 
         return WindowLayout
 
-    # (runs after app is loaded)
-    def on_kv_post(self):
-        self.math_input = self.ids.math_input
-    
     
     # Utility ? idfk
     def leave(self):
@@ -92,12 +92,6 @@ class KivyApp(App):
     def on_resume(self):
         print("hi!")
 
-    
-    # Math
-    # (handle button click)
-    def do_math(self):
-       self.ids.math_output.text=lexer(self.math_input)
- 
 
 # Run
 def main():
